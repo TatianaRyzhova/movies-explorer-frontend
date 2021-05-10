@@ -1,0 +1,62 @@
+.promo {
+  background-color: #073042;
+  display: flex;
+  justify-content: space-between;
+  padding: 75px 326px 0;
+}
+
+.promo__heading {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  width: 640px;
+  margin-bottom: 36px;
+  margin-top: 0;
+}
+
+.promo__text {
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  opacity: 0.5;
+  width: 310px;
+  margin-bottom: 146px;
+}
+
+.promo__logo {
+  width: 310px;
+  height: 304px;
+}
+
+.promo__button {
+  width: 129px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255, 0.5);
+  box-sizing: border-box;
+  border-radius: 3px;
+  color: #FFFFFF;
+  background-color:  #073042;
+  cursor: pointer;
+  margin-bottom: 75px;
+  padding: 0;
+  transition: 0.5s ease-in-out;
+}
+
+.promo__button:hover {
+  opacity: 0.8;
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.1);
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotation {
+  animation: rotation 20s linear infinite;
+}

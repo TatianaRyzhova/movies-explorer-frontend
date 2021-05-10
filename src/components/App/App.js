@@ -1,8 +1,14 @@
 import './App.css';
+import Header from '../Header/Header';
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <div className="page">
+      <Header/>
+      <Main/>
+      <Footer/>
       {/*<header className="App-header">*/}
       {/*  <img src={logo} className="App-logo" alt="logo" />*/}
       {/*  <p>*/}

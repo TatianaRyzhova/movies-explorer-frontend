@@ -1,11 +1,13 @@
 .page {
   margin: 0 auto;
-  background-color: #202020;
   color: #FFFFFF;
   font-family: 'Inter', Arial, sans-serif;
-  min-height: 1240px;
 }
 
 body {
   margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
