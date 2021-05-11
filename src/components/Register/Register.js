@@ -36,10 +36,13 @@ function Register() {
             placeholder={'Password'}
           />
 
-          <button type="submit" aria-label="Save"
-                  className="registration__save-button registration__save-button_sign-up">
-            Register
-          </button>
+          <Link to="/">
+            <button type="submit" aria-label="Save"
+                    className="registration__save-button registration__save-button_sign-up">
+              Register
+            </button>
+          </Link>
+
         </form>
 
         <div className="registration__signin">

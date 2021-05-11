@@ -25,10 +25,13 @@ function Login() {
             placeholder={'Password'}
           />
 
-          <button type="submit" aria-label="Save"
-                  className="login__save-button login__save-button_sign-in">
-            Sign In
-          </button>
+          <Link to="/">
+            <button type="submit" aria-label="Save"
+                    className="login__save-button login__save-button_sign-in">
+              Sign In
+            </button>
+          </Link>
+
         </form>
 
         <div className="login__signup">
