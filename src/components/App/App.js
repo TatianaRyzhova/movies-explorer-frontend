@@ -3,6 +3,7 @@ import './App.css';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
 
         <Route path="/signin">
           <Login/>
+        </Route>
+
+        <Route path="/">
+          <NotFound/>
         </Route>
       </Switch>
 
