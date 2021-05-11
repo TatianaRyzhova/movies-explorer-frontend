@@ -1,20 +1,26 @@
 import {Redirect, Link, Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
-import Header from '../Header/Header';
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 function App() {
   return (
     <div className="page">
-      <Header/>
-      <Main/>
-      <Footer/>
+
+
 
       <Switch>
+        <Route exact path="/">
+          <Main/>
+        </Route>
+
         <Route path="/signup">
           <Register/>
+        </Route>
+
+        <Route path="/signin">
+          <Login/>
         </Route>
       </Switch>
 
