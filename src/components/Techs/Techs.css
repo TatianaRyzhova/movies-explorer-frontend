@@ -1,6 +1,13 @@
 .techs {
   background-color: #272727;
-  padding: 100px 326px 0;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+  padding-top: 100px;
+  margin: 0 auto;
 }
 
 .techs__section-heading {

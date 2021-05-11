@@ -1,6 +1,13 @@
 .about-me {
   background-color: #202020;
-  padding: 110px 326px 0;
+}
+
+.about-me__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+  padding-top: 110px;
+  margin: 0 auto;
 }
 
 .about-me__section-heading {

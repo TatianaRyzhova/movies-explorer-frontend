@@ -1,8 +1,12 @@
 .header {
-  display: flex;
-  padding: 0 326px;
-  justify-content: space-between;
   background-color: #073042;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1140px;
 }
 
 .header__logo {

@@ -1,7 +1,9 @@
 .page {
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   color: #FFFFFF;
   font-family: 'Inter', Arial, sans-serif;
+  position: relative;
+  width: 100%;
 }
 
 body {
