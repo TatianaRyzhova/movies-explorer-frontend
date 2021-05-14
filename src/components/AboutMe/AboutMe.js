@@ -45,7 +45,7 @@ function AboutMe() {
           <nav>
             <ul className="about-me__portfolio-links">
               <li>
-                <a href="#" className="about-me__portfolio-link" target="_blank" rel="noreferrer">
+                <a href="https://tatianaryzhova.github.io/how-to-learn/" className="about-me__portfolio-link" target="_blank" rel="noreferrer">
                   Static website
                   <img src={linkIcon} alt="link icon" className="about-me__portfolio-link-icon"/>
                 </a>
