@@ -17,6 +17,7 @@ function Register() {
             label={'Name'}
             type={'name'}
             name={'name'}
+            id={'name-input'}
             placeholder={'Name'}
           />
 
@@ -27,12 +28,14 @@ function Register() {
             label={'E-mail'}
             type={'email'}
             name={'email'}
+            id={'email-input'}
             placeholder={'E-mail'}
           />
           <AuthInput
             label={'Password'}
             type={'password'}
             name={'password'}
+            id={'password-input'}
             placeholder={'Password'}
           />
 

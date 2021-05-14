@@ -14,12 +14,12 @@ function Profile() {
         <form className="profile__form">
           <div className="profile__data">
             <label className="profile__label">Name</label>
-            <input type="name" name="name" className="profile__input" required/>
+            <input type="name" name="name" id="name-input" className="profile__input" value="Tatiana" required/>
           </div>
 
           <div className="profile__data">
             <label className="profile__label">E-mail</label>
-            <input type="email" name="email" className="profile__input" required/>
+            <input type="email" name="email" id="email-input" className="profile__input" value="test@mail.ru" required/>
           </div>
         </form>
 

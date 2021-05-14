@@ -16,12 +16,14 @@ function Login() {
             label={'E-mail'}
             type={'email'}
             name={'email'}
+            id={'name-input'}
             placeholder={'E-mail'}
           />
           <AuthInput
             label={'Password'}
             type={'password'}
             name={'password'}
+            id={'password-input'}
             placeholder={'Password'}
           />
 
