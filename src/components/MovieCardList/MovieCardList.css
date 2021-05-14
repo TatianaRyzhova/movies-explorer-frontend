@@ -1,0 +1,14 @@
+.movies {
+  background-color: #202020;
+}
+
+.movies__list {
+  padding-top: 80px;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 32px;
+}

@@ -1,0 +1,29 @@
+.more-button__container {
+  background-color: #202020;
+  padding-top: 50px;
+  padding-bottom: 80px;
+}
+
+.more-button {
+  width: 1140px;
+  height: 36px;
+  margin: 0 auto;
+  padding: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background-color: #2F2F2F;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.more-button:hover {
+  opacity: 0.7;
+  background-color: #3DDC84;
+}

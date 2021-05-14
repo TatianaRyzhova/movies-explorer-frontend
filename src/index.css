@@ -17,4 +17,6 @@
 @import url("components/SavedMovies/SavedMovies.css");
 @import url("components/SearchBar/SearchBar.css");
 @import url("components/Switch/Switch.css");
-@import url("components/Card/Card.css");
+@import url("components/MovieCard/MovieCard.css");
+@import url("components/MovieCardList/MovieCardList.css");
+@import url("components/MoreButton/MoreButton.css");
