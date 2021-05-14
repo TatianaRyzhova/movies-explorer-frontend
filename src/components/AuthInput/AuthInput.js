@@ -1,14 +1,19 @@
 import React from "react";
-import InputError from "../InputError/InputError";
 
 function AuthInput(props) {
   return(
     <div className="auth-input__info">
+
       <label>{props.label}</label>
+
       <input type={props.type} name={props.name}  id={props.id} className="auth-input"
-             placeholder={props.placeholder} required
+             placeholder={props.placeholder} required onChange={props.handleChange}
       />
-      <InputError name={props.name}/>
+
+      <span id={`${props.name}-input-error`} className="input-error">
+        {props.errorName || ''}
+    </span>
+
     </div>
 
 
