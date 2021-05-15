@@ -2,6 +2,8 @@
   background-color: #222222;
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  width: 270px;
+  height: 218px;
 }
 
 .movie__description-container {
@@ -27,6 +29,11 @@
   align-items: center;
   color: #8B8B8B;
   margin: 0;
+}
+
+.movie__photo {
+  width: 270px;
+  height: 151px;
 }
 
 .movie__like-button {
@@ -87,5 +94,29 @@
   -ms-transform: scale(1.5);
   -webkit-transform: scale(1.5);
   transform: scale(1.4);
+}
+
+@media screen and (max-width: 1220px) {
+  .movie-card {
+    width: 339px;
+    height: 257px;
+  }
+
+  .movie__photo {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movie-card {
+    width: 300px;
+    height: 235px;
+  }
+
+  .movie__photo {
+    width: 300px;
+    height: 168px;
+  }
 }
 

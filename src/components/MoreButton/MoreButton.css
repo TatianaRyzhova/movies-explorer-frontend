@@ -27,3 +27,15 @@
   opacity: 0.7;
   background-color: #3DDC84;
 }
+
+@media screen and (max-width: 1220px) {
+  .more-button {
+    width: 708px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .more-button {
+    width: 300px;
+  }
+}

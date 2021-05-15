@@ -51,3 +51,36 @@
 .search-bar__button:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 1220px) {
+  .search-bar__form {
+    flex-direction: column;
+    max-width: 708px;
+    padding-top: 60px;
+    padding-bottom: 57px;
+  }
+
+  .search-bar__form_input {
+    margin-bottom: 38px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .search-bar__form {
+    flex-direction: column;
+    max-width: 292px;
+    padding-top: 60px;
+    padding-bottom: 44px;
+  }
+
+  .search-bar__form_input {
+    margin-bottom: 45px;
+  }
+
+  .search-bar__form_input input {
+    margin-left: 16px;
+    font-size: 11px;
+    color: #FFFFFF;
+    width: 100%;
+  }
+}
