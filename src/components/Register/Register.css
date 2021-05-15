@@ -22,7 +22,7 @@
 }
 
 .registration__save-button {
-  margin-top: 90px;
+  margin-top: 69px;
   width: 396px;
   height: 45px;
   padding: 0;
@@ -56,8 +56,7 @@
   display: flex;
   flex-direction: row;
   align-self: center;
-  margin-top:16px;
-
+  margin-top: 16px;
 }
 
 .registration__signin-text {
@@ -81,4 +80,26 @@
 
 .registration__signin-link:hover {
   opacity: 0.8;
+}
+
+@media all and (max-width: 425px) {
+  .registration__save-button {
+    width: 260px;
+    height: 45px;
+    margin: 157px auto 0;
+    display: block;
+  }
+
+  .registration__signin {
+    margin-top: 14px;
+  }
+
+  .registration__signin-text {
+    font-size: 12px;
+  }
+
+  .registration__signin-link {
+    font-size: 12px;
+  }
+
 }

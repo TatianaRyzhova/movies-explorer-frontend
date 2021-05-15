@@ -28,3 +28,21 @@ label {
   color: #EE3465;
   margin-top: 10px;
 }
+
+@media all and (max-width: 425px) {
+  .auth-input__info {
+    align-items: center;
+  }
+
+  label {
+    width: 260px;
+  }
+
+  .auth-input {
+    width: 230px;
+  }
+
+  .input-error {
+    width: 260px;
+  }
+}

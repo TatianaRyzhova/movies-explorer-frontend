@@ -39,3 +39,22 @@
 .not-found__link:hover {
   opacity: 0.8;
 }
+
+@media all and (max-width: 425px){
+  .not-found__picture {
+    width: 300px;
+    height: 97px;
+    padding-top: 329px;
+  }
+
+  .not-found__text {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 10px auto 284px;
+  }
+
+  .not-found__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
