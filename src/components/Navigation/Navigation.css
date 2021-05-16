@@ -3,10 +3,12 @@
 }
 
 .navigation__not-logged {
+  /*Change it to display:flex if need to see the header when user is not logged otherwise display:none*/
   display: flex;
 }
 
 .navigation__logged {
+  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
   display: none;
   justify-content: space-between;
   align-items: center;
@@ -187,7 +189,7 @@
   }
 
   .navigation__burger {
-    /*Change it to block*/
+    /*Change it to display:block to see the header when you user is logged*/
     display: none;
     width: 44px;
     height: 44px;
@@ -309,7 +311,7 @@
   }
 
   .navigation__burger {
-    /*Change it to block*/
+    /*Change it to display:block to see the header when you user is logged*/
     display: none;
     width: 40px;
     height: 43px;
