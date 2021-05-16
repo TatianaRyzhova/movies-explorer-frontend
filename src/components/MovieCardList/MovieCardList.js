@@ -20,6 +20,8 @@ function MovieCardList() {
             <MovieCard liked={false}/>
             <MovieCard liked={true}/>
             <MovieCard liked={false}/>
+            <MovieCard liked={true}/>
+            <MovieCard liked={false}/>
           </Route>
 
         </Switch>
