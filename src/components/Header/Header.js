@@ -8,7 +8,7 @@ function Header() {
   const pathname = window.location.pathname;
 
   return (
-     <header className={`${pathname === '/'  ? "header__main-page" : "header"}`}>
+    <header className={`${pathname === '/' ? "header__main-page" : "header"}`}>
 
       <div className="header__container">
 
