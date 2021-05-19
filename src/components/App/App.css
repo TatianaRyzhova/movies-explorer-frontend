@@ -1,0 +1,18 @@
+.page {
+  color: #FFFFFF;
+  font-family: 'Inter', Arial, sans-serif;
+  position: relative;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}

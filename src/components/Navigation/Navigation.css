@@ -1,0 +1,349 @@
+.navigation {
+  align-self: center;
+}
+
+.navigation__not-logged {
+  /*Change it to display:flex if need to see the header when user is not logged otherwise display:none*/
+  display: flex;
+}
+
+.navigation__logged {
+  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__logged_mobile {
+  flex-direction: column;
+
+}
+
+.navigation__main-page {
+  display: none;
+}
+
+.navigation__overlay {
+  display: none
+}
+
+.navigation__signup {
+  text-decoration: none;
+  color: #FFFFFF;
+  margin-right: 30px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: 0.5s ease-in-out;
+  align-self: center;
+}
+
+.navigation__signup:hover {
+  opacity: 0.8;
+}
+
+.navigation__signin-button {
+  width: 76px;
+  height: 32px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.navigation__signin-button:hover {
+  opacity: 0.8;
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.2);
+}
+
+.navigation__movies-container {
+  margin-right: 364px;
+  text-decoration: none;
+  align-self: center;
+}
+
+.navigation__movies {
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #FFFFFF;
+  transition: 0.5s ease-in-out;
+}
+
+.navigation__movies:active {
+  font-weight: bold;
+}
+
+.navigation__movies-container > a:nth-child(2) {
+  margin-right: 16px;
+}
+
+.navigation__movies:hover {
+  opacity: 0.8;
+  color: #3DDC84;
+}
+
+.navigation__profile-button {
+  width: 100px;
+  height: 32px;
+  padding: 0;
+  border: 2px solid rgba(170, 170, 170, 0.2);
+  background-color: transparent;
+  box-sizing: border-box;
+  border-radius: 50px;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+  margin: 0;
+}
+
+.navigation__profile-button:hover {
+  opacity: 0.8;
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.1);
+  background-color: #3DDC84;
+}
+
+.navigation__burger {
+  display: none;
+}
+
+.navigation_menu-open .navigation__wrapper {
+  display: flex;
+}
+
+.navigation__wrapper {
+  display: flex;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .navigation {
+    margin: 0 30px 0 0;
+  }
+
+  .navigation__profile-button {
+    margin-bottom: 90px;
+  }
+
+  .navigation__overlay {
+    height: 100%;
+    width: 520px;
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #202020;
+  }
+
+  .navigation__movies-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 159px auto 475px;
+  }
+
+  .navigation__movies {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .navigation__movies:last-of-type {
+    margin-top: 28px;
+  }
+
+  .navigation__movies-container > a:nth-child(2) {
+    margin-right: 0;
+  }
+
+  .navigation__profile-button {
+    margin-bottom: 90px;
+  }
+
+  .navigation__main-page {
+    display: block;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+  }
+
+  .navigation__logged {
+    justify-content: normal;
+  }
+
+  .navigation__burger {
+    /*Change it to display:block to see the header when you user is logged*/
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: transparent url('../../images/burger-menu.svg') center no-repeat;
+    border: none;
+    transition: visibility 0s, opacity 0.3s;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .navigation_menu-open .navigation__burger {
+    width: 22px;
+    height: 22px;
+    background: transparent url('../../images/close-icon.svg') center no-repeat;
+    background-size: 30px 30px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: fixed;
+    top: 3%;
+    right: 4%;
+    z-index: 100;
+  }
+
+  .navigation__wrapper {
+    flex-direction: column;
+    position: relative;
+    width: 520px;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  .navigation__wrapper::before {
+    content: '';
+    width: 100%;
+    opacity: 0.7;
+    background: #545454;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+}
+
+
+@media screen and (max-width: 760px) {
+  .navigation {
+    margin: 0 14px 0 0;
+  }
+
+  .navigation__signin-button {
+    width: 54px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .navigation__signup {
+    margin-right: 14px;
+    font-size: 10px;
+  }
+
+  .navigation__profile-button {
+    margin-bottom: 46px;
+  }
+
+  .navigation__movies-container {
+    display: flex;
+    flex-direction: column;
+    margin: 144px auto 298px;
+  }
+
+  .navigation__movies {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .navigation__movies:last-of-type {
+    margin-top: 24px;
+  }
+
+  .navigation__movies-container > a:nth-child(2) {
+    margin-right: 0;
+  }
+
+  .navigation__profile-button {
+    margin-bottom: 46px;
+  }
+
+  .navigation__main-page {
+    display: block;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
+
+  .navigation__logged {
+    justify-content: normal;
+  }
+
+  .navigation__overlay {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 15%;
+    left: 0;
+    background-color: #202020;
+  }
+
+  .navigation__burger {
+    /*Change it to display:block to see the header when you user is logged*/
+    display: none;
+    width: 40px;
+    height: 43px;
+    background: transparent url('../../images/burger-menu.svg') center no-repeat;
+    border: none;
+    transition: visibility 0s, opacity 0.3s;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .navigation__wrapper {
+    flex-direction: column;
+    position: relative;
+    width: 320px;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  .navigation__wrapper::before {
+    content: '';
+    width: 100%;
+    opacity: 0.7;
+    background: #545454;
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+}
