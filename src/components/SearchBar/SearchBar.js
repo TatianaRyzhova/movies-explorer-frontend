@@ -12,6 +12,7 @@ function SearchBar() {
             id="header-search"
             placeholder="Movies"
             name="movies"
+            required
           />
           <button className="search-bar__button" type='submit' aria-label='save' name="submit">
             <img src={searchIcon} alt="loop search icon" className="search-bar__loop-icon"/>
