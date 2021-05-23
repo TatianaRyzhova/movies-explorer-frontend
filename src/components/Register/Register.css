@@ -43,6 +43,7 @@
   color: rgba(0, 0, 0, 0.2);
   background: #4285F4;
   pointer-events: none;
+  cursor: none;
 }
 
 .registration__save-button:hover {
