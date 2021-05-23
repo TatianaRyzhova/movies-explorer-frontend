@@ -13,10 +13,7 @@ function InfoTooltip(props) {
         <div className="info-tooltip">
           <img src={props.success ? authSuccessImage : authFailureImage} alt="register response" className="info-tooltip__image"/>
           <p className="info-tooltip__message">
-            {props.success ?
-              "You have successfully registered!" :
-              "Something went wrong! Please try again."
-            }
+            {props.infoTooltipMessage}
           </p>
         </div>
       </div>

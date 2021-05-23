@@ -4,8 +4,14 @@ import AuthHeader from "../AuthHeader/AuthHeader";
 import {Link} from "react-router-dom";
 import {useFormWithValidation} from "../../hooks/useForm";
 
-function Login() {
+function Login({onLogin}) {
   const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onLogin(values.email, values.password);
+    resetForm();
+  }
 
   return (
     <div className="login">
@@ -14,7 +20,7 @@ function Login() {
           greetingText={'Nice to see you!'}
         />
 
-        <form name="login" className="login__form" noValidate>
+        <form name="login" className="login__form" onSubmit={handleSubmit} noValidate>
           <AuthInput
             label={'E-mail'}
             type={'email'}
@@ -37,14 +43,12 @@ function Login() {
             handleChange={handleChange}
           />
 
-          {/*/!*<Link to="/">*!/ use history push in App*/}
             <button type="submit" aria-label="Save"
                     disabled={!isValid}
-                    className={`registration__save-button ${!isValid && "registration__save-button_state_disabled"}`}
+                    className={`login__save-button ${!isValid && "login__save-button_state_disabled"}`}
             >
               Sign In
             </button>
-          {/*</Link>*/}
 
         </form>
 

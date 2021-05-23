@@ -11,6 +11,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import {checkToken, login, register} from "../../utils/Auth";
 import {mainApi} from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function App() {
   const history = useHistory();
@@ -19,6 +20,8 @@ function App() {
   const [userName, setUserName] = useState('');
   const [success, setSuccess] = useState(false);
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
+  const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -36,17 +39,20 @@ function App() {
     }
   }, [history]);
 
-  const handleLogin = ({email, password}) => {
+  const handleLogin = (email, password) => {
     return login(email, password)
       .then(result => {
         if (result.token) {
           localStorage.setItem('token', result.token);
           setLoggedIn(true);
           setEmail(email);
-          history.push('/');
+          history.push('/profile');
         }
       })
       .catch((error) => {
+        setSuccess(false);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('Incorrect email or password.')
         console.log(error)
       })
   }
@@ -65,59 +71,79 @@ function App() {
         setSuccess(true);
         setLoggedIn(true);
         setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('You have successfully registered!')
         history.push('/movies');
         return result
       })
       .catch((error) => {
+        setSuccess(false);
         setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('Something went wrong! Please try again.')
         console.log(error)
       })
   }
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi.getUserInfo()
+        .then((response) => {
+          setCurrentUser(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }, [loggedIn])
 
   function closeAllPopups() {
     setInfoTooltipPopupOpen(false);
   }
 
 
-
   return (
     <div className="page">
-      <Switch>
-        <Route exact path="/">
-          <Main/>
-        </Route>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path="/">
+            <Main/>
+          </Route>
 
-        <Route path="/signup">
-          <Register onRegister={handleRegister}/>
-        </Route>
+          <Route path="/signup">
+            <Register onRegister={handleRegister}/>
+          </Route>
 
-        <Route path="/signin">
-          <Login/>
-        </Route>
+          <Route path="/signin">
+            <Login onLogin={handleLogin}/>
+          </Route>
 
-        <Route path="/profile">
-          <Profile/>
-        </Route>
+          <Route path="/profile">
+            <Profile
+              onSignOut={handleSignOut}
+              email={email}
+              name={userName}
+            />
+          </Route>
 
-        <Route path="/movies">
-          <Movies/>
-        </Route>
+          <Route path="/movies">
+            <Movies/>
+          </Route>
 
-        <Route path="/saved-movies">
-          <SavedMovies/>
-        </Route>
+          <Route path="/saved-movies">
+            <SavedMovies/>
+          </Route>
 
-        <Route path="/">
-          <NotFound/>
-        </Route>
-      </Switch>
+          <Route path="/">
+            <NotFound/>
+          </Route>
+        </Switch>
 
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        success={success}
-        onClose={closeAllPopups}
-      />
-
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          success={success}
+          onClose={closeAllPopups}
+          infoTooltipMessage={infoTooltipMessage}
+        />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

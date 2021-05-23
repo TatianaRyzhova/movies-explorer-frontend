@@ -39,6 +39,14 @@
   transition: 0.5s ease-in-out;
 }
 
+.login__save-button_state_disabled {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  background: #4285F4;
+  pointer-events: none;
+  cursor: none;
+}
+
 .login__save-button:hover {
   opacity: 0.8;
   -ms-transform: scale(1.5);
