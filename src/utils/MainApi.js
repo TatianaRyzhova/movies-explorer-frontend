@@ -13,7 +13,7 @@ class MainApi {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

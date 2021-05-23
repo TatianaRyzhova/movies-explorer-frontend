@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Route, Switch, useHistory} from 'react-router-dom';
+import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -12,6 +12,7 @@ import {checkToken, login, register} from "../../utils/Auth";
 import {mainApi} from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const history = useHistory();
@@ -46,6 +47,7 @@ function App() {
           localStorage.setItem('token', result.token);
           setLoggedIn(true);
           setEmail(email);
+          setUserName(result.name); //????
           history.push('/profile');
         }
       })
@@ -95,6 +97,23 @@ function App() {
     }
   }, [loggedIn])
 
+  function handleUpdateUser(user) {
+    // setIsLoading(true);
+    mainApi.updateUser(user.email, user.name)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('Your profile was updated successfully!')
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      // .finally(() => {
+      //   setIsLoading(false);
+      // });
+  }
+
   function closeAllPopups() {
     setInfoTooltipPopupOpen(false);
   }
@@ -116,21 +135,38 @@ function App() {
             <Login onLogin={handleLogin}/>
           </Route>
 
-          <Route path="/profile">
-            <Profile
-              onSignOut={handleSignOut}
-              email={email}
-              name={userName}
-            />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            handleSignOut={handleSignOut}
+            email={email}
+            name={userName}
+            onUpdateUser={handleUpdateUser}
+            loggedIn={loggedIn}
+          />
+
+          <ProtectedRoute
+            path="/movies"
+            component={Movies}
+            loggedIn={loggedIn}
+          />
+
+          <ProtectedRoute
+            path="/saved-movies"
+            component={SavedMovies}
+            loggedIn={loggedIn}
+          />
+
+          <Route>
+            {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/signin"/>}
           </Route>
 
-          <Route path="/movies">
-            <Movies/>
-          </Route>
-
-          <Route path="/saved-movies">
-            <SavedMovies/>
-          </Route>
+          {/*<Route path="/movies">*/}
+          {/*  <Movies/>*/}
+          {/*</Route>*/}
+          {/*<Route path="/saved-movies">*/}
+          {/*  <SavedMovies/>*/}
+          {/*</Route>*/}
 
           <Route path="/">
             <NotFound/>

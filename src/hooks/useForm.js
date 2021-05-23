@@ -4,7 +4,6 @@ export function useFormWithValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-  const [dirtyInputs, setDirtyInputs] = useState({});
 
   const handleChange = (evt) => {
     const input = evt.target;
