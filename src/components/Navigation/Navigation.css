@@ -3,20 +3,27 @@
 }
 
 .navigation__not-logged {
-  /*Change it to display:flex if need to see the header when user is not logged otherwise display:none*/
+  /*visibility: hidden;*/
+  display: none;
+}
+
+.navigation__not-logged_visible {
   display: flex;
 }
 
 .navigation__logged {
-  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
   display: none;
+}
+
+.navigation__logged_visible {
+  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .navigation__logged_mobile {
   flex-direction: column;
-
 }
 
 .navigation__main-page {
@@ -184,13 +191,13 @@
     margin-bottom: 28px;
   }
 
-  .navigation__logged {
+  .navigation__logged_visible {
     justify-content: normal;
   }
 
   .navigation__burger {
     /*Change it to display:block to see the header when you user is logged*/
-    display: none;
+    display: block;
     width: 44px;
     height: 44px;
     background: transparent url('../../images/burger-menu.svg') center no-repeat;
@@ -294,7 +301,7 @@
     margin-bottom: 24px;
   }
 
-  .navigation__logged {
+  .navigation__logged_visible {
     justify-content: normal;
   }
 
@@ -312,7 +319,7 @@
 
   .navigation__burger {
     /*Change it to display:block to see the header when you user is logged*/
-    display: none;
+    display: block;
     width: 40px;
     height: 43px;
     background: transparent url('../../images/burger-menu.svg') center no-repeat;

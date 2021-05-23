@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useFormWithValidation} from "../../hooks/useForm";
 
-function Profile(props) {
+function Profile(props, loggedIn) {
   const currentUser = useContext(CurrentUserContext);
   const {values, errors, isValid, handleChange, setValues} = useFormWithValidation();
 
@@ -22,7 +22,7 @@ function Profile(props) {
   return (
     <div>
 
-      <Header/>
+      <Header loggedIn={loggedIn}/>
 
       <div className="profile">
         <h1 className="profile__greeting">Hello, {currentUser.name}!</h1>

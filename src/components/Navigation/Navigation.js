@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {NavLink} from 'react-router-dom';
 import accountIcon from "../../images/account-icon.svg"
 
-function Navigation() {
+function Navigation(props) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -14,7 +14,8 @@ function Navigation() {
     <nav className={`navigation
          ${isMenuOpen ? "navigation_menu-open" : ""}`}
     >
-      <div className="navigation__not-logged">
+      {/*<div className="navigation__not-logged">*/}
+      <div className={`navigation__not-logged ${props.loggedIn ? '' : "navigation__not-logged_visible"}`}>
         <NavLink to="/signup" className="navigation__signup">Register</NavLink>
         <NavLink to="/signin" className="header__signin">
           <button className="navigation__signin-button" type='button' aria-label='menu'>Sign In</button>
@@ -30,15 +31,16 @@ function Navigation() {
 
       <div className="navigation__wrapper">
 
-        <div className=
-               {`navigation__logged
-         ${isMenuOpen ? "navigation__logged_mobile navigation__overlay" : ""}`}
+        <div className={`navigation__logged ${props.loggedIn ?
+          `navigation__logged_visible ${isMenuOpen ? "navigation__logged_mobile navigation__overlay" : ""}`
+          : ''}`}
         >
 
           <div className="navigation__movies-container">
             <NavLink to="/" className="navigation__main-page">Home Page</NavLink>
             <NavLink to="/movies" className="navigation__movies" activeStyle={{fontWeight: "bold"}}>Movies</NavLink>
-            <NavLink to="/saved-movies" className="navigation__movies" activeStyle={{fontWeight: "bold"}}>Saved Movies</NavLink>
+            <NavLink to="/saved-movies" className="navigation__movies" activeStyle={{fontWeight: "bold"}}>Saved
+              Movies</NavLink>
           </div>
 
           <div>

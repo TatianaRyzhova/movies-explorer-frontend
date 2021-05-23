@@ -48,14 +48,32 @@ function App() {
           localStorage.setItem('token', result.token);
           setLoggedIn(true);
           setEmail(email);
-          setUserName(result.name); //????
-          history.push('/profile');
+          setUserName(result.name);
+          history.push('/movies');
         }
       })
       .catch((error) => {
         setSuccess(false);
         setInfoTooltipPopupOpen(true);
-        setInfoTooltipMessage('Incorrect email or password.')
+        setInfoTooltipMessage('Incorrect email or password.');
+        console.log(error)
+      })
+  }
+
+  const handleRegister = (name, email, password) => {
+    return register(name, email, password)
+      .then(result => {
+        setSuccess(true);
+        setLoggedIn(true);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('You have successfully registered!');
+        history.push('/movies');
+        return result
+      })
+      .catch((error) => {
+        setSuccess(false);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('Something went wrong! Please try again.');
         console.log(error)
       })
   }
@@ -66,24 +84,6 @@ function App() {
     setUserName('');
     setLoggedIn(false);
     history.push('/signin');
-  }
-
-  const handleRegister = (name, email, password) => {
-    return register(name, email, password)
-      .then(result => {
-        setSuccess(true);
-        setLoggedIn(true);
-        setInfoTooltipPopupOpen(true);
-        setInfoTooltipMessage('You have successfully registered!')
-        history.push('/movies');
-        return result
-      })
-      .catch((error) => {
-        setSuccess(false);
-        setInfoTooltipPopupOpen(true);
-        setInfoTooltipMessage('Something went wrong! Please try again.')
-        console.log(error)
-      })
   }
 
   useEffect(() => {
@@ -129,7 +129,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path="/">
-            <Main/>
+            <Main loggedIn={loggedIn}/>
           </Route>
 
           <Route path="/signup">

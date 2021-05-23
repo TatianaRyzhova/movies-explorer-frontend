@@ -6,11 +6,11 @@ import MovieCardList from "../MovieCardList/MovieCardList";
 import MoreButton from "../MoreButton/MoreButton";
 import Preloader from "../Preloader/Preloader";
 
-function SavedMovies() {
+function SavedMovies({loggedIn}) {
   return (
     <div>
 
-      <Header/>
+      <Header loggedIn={loggedIn}/>
       <SearchBar/>
       <Preloader/>
       <MovieCardList/>

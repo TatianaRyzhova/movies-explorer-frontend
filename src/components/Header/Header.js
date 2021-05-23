@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import {Link} from 'react-router-dom';
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({loggedIn}) {
 
   const pathname = window.location.pathname;
 
@@ -16,7 +16,7 @@ function Header() {
           <img src={logo} alt="logo" className="header__logo"/>
         </Link>
 
-        <Navigation/>
+        <Navigation loggedIn={loggedIn}/>
 
       </div>
 
