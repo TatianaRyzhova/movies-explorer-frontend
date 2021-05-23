@@ -19,17 +19,13 @@ function Profile(props) {
 
   const isProfileFormValid = isValid && (values.name !== currentUser.name || values.email !== currentUser.email)
 
-  // const handleSignOut = function () {
-  //   onSignOut();
-  // }
-
   return (
     <div>
 
       <Header/>
 
       <div className="profile">
-        <h1 className="profile__greeting">Hello, Tatiana!</h1>
+        <h1 className="profile__greeting">Hello, {currentUser.name}!</h1>
 
         <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__data">
@@ -66,18 +62,21 @@ function Profile(props) {
             </div>
 
           </div>
+
+          <div className="profile__footer">
+            <button type="submit" aria-label="Save"
+                    disabled={!isProfileFormValid}
+                    className={`profile__modify-button ${!isProfileFormValid && "profile__modify-button_state_disabled"}`}
+            >
+              {props.isLoading ? 'Modifying...' : 'Modify'}
+            </button>
+
+            <Link to="/" className="profile__logout" onClick={props.handleSignOut}>Sign Out</Link>
+          </div>
+
         </form>
 
-        <div className="profile__footer">
-          <button type="submit" aria-label="Save"
-                  disabled={!isProfileFormValid}
-                  className={`profile__modify-button ${!isProfileFormValid && "profile__modify-button_state_disabled"}`}
-          >
-            Modify
-          </button>
 
-          <Link to="/" className="profile__logout" onClick={props.handleSignOut}>Sign Out</Link>
-        </div>
       </div>
 
     </div>

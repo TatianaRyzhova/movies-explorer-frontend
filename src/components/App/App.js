@@ -23,6 +23,7 @@ function App() {
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -97,22 +98,26 @@ function App() {
     }
   }, [loggedIn])
 
-  function handleUpdateUser(user) {
-    // setIsLoading(true);
-    mainApi.updateUser(user.email, user.name)
+  const handleUpdateUser = (user) => {
+    setIsLoading(true);
+    mainApi.updateUser(user.name, user.email)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
+        setSuccess(true);
         setInfoTooltipPopupOpen(true);
-        setInfoTooltipMessage('Your profile was updated successfully!')
-        closeAllPopups();
+        setInfoTooltipMessage('Your data was successfully modified!')
       })
       .catch((error) => {
         console.log(error)
+        setSuccess(false);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('Something went wrong! Please try again.')
       })
-      // .finally(() => {
-      //   setIsLoading(false);
-      // });
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
+
 
   function closeAllPopups() {
     setInfoTooltipPopupOpen(false);
@@ -143,6 +148,7 @@ function App() {
             name={userName}
             onUpdateUser={handleUpdateUser}
             loggedIn={loggedIn}
+            isLoading={isLoading}
           />
 
           <ProtectedRoute
