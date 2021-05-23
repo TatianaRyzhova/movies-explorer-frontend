@@ -64,11 +64,13 @@ function App() {
     return register(name, email, password)
       .then(result => {
         setSuccess(true);
-        setLoggedIn(true);
         setInfoTooltipPopupOpen(true);
         setInfoTooltipMessage('You have successfully registered!');
         history.push('/movies');
         return result
+      })
+      .then(() => {
+        return handleLogin(email, password);
       })
       .catch((error) => {
         setSuccess(false);

@@ -195,8 +195,7 @@
     justify-content: normal;
   }
 
-  .navigation__burger {
-    /*Change it to display:block to see the header when you user is logged*/
+  .navigation__burger_visible {
     display: block;
     width: 44px;
     height: 44px;
@@ -207,7 +206,7 @@
     cursor: pointer;
   }
 
-  .navigation_menu-open .navigation__burger {
+  .navigation_menu-open .navigation__burger_visible {
     width: 22px;
     height: 22px;
     background: transparent url('../../images/close-icon.svg') center no-repeat;
@@ -317,8 +316,7 @@
     background-color: #202020;
   }
 
-  .navigation__burger {
-    /*Change it to display:block to see the header when you user is logged*/
+  .navigation__burger_visible {
     display: block;
     width: 40px;
     height: 43px;

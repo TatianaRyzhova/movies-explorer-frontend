@@ -1,4 +1,4 @@
-import {BASE_URL, AUTH_BASE_URL} from './constants';
+import {AUTH_BASE_URL, BASE_URL} from './constants';
 
 class MainApi {
   constructor({baseUrl}) {

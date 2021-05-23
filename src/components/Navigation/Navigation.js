@@ -14,7 +14,6 @@ function Navigation(props) {
     <nav className={`navigation
          ${isMenuOpen ? "navigation_menu-open" : ""}`}
     >
-      {/*<div className="navigation__not-logged">*/}
       <div className={`navigation__not-logged ${props.loggedIn ? '' : "navigation__not-logged_visible"}`}>
         <NavLink to="/signup" className="navigation__signup">Register</NavLink>
         <NavLink to="/signin" className="header__signin">
@@ -23,7 +22,7 @@ function Navigation(props) {
       </div>
 
       <button
-        className="navigation__burger"
+        className={`navigation__burger ${props.loggedIn ? 'navigation__burger_visible' : ''}`}
         type='button'
         aria-label='burger menu'
         onClick={toggleMenu}
