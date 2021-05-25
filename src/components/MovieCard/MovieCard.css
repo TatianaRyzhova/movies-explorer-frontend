@@ -21,6 +21,13 @@
   margin-top: 0;
 }
 
+.movie__info {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 190px;
+}
+
 .movie__duration {
   font-weight: normal;
   font-size: 11px;

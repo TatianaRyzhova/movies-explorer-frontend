@@ -10,6 +10,7 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import {checkToken, login, register} from "../../utils/Auth";
 import {mainApi} from "../../utils/MainApi";
+import {moviesApi} from "../../utils/MoviesApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -24,6 +25,7 @@ function App() {
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -120,10 +122,35 @@ function App() {
       });
   }
 
-
   function closeAllPopups() {
     setInfoTooltipPopupOpen(false);
   }
+
+  function getFilteredMovies() {
+    setIsLoading(true);
+    moviesApi.getMovies()
+      .then((response) => {
+        localStorage.setItem('movies', JSON.stringify(response))
+        setMovies(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }
+
+  useEffect(() => {
+    moviesApi.getMovies()
+      .then((response) => {
+        // localStorage.setItem('movies', JSON.stringify(response))
+        setMovies(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
 
 
   return (
@@ -157,6 +184,9 @@ function App() {
             path="/movies"
             component={Movies}
             loggedIn={loggedIn}
+            movies={movies}
+            onGetMovies={getFilteredMovies}
+            isMoviesLoading={isLoading}
           />
 
           <ProtectedRoute
