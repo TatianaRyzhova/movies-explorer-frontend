@@ -1,5 +1,6 @@
 .movies {
   background-color: #202020;
+  min-height: 400px;
 }
 
 .movies__list {

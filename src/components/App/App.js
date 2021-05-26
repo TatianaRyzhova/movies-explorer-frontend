@@ -25,6 +25,7 @@ function App() {
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isMoviesErrors, setIsMoviesErrors] = React.useState('');
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -128,6 +129,7 @@ function App() {
 
   function getFilteredMovies() {
     setIsLoading(true);
+    setIsMoviesErrors();
     moviesApi.getMovies()
       .then((response) => {
         localStorage.setItem('movies', JSON.stringify(response))
@@ -135,6 +137,8 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
+        setIsMoviesErrors('An error occurred during the request. ' +
+          'There may be a connection problem or the server is unavailable. Please try again later.');
       })
       .finally(() => {
         setIsLoading(false);
@@ -187,6 +191,7 @@ function App() {
             movies={movies}
             onGetMovies={getFilteredMovies}
             isMoviesLoading={isLoading}
+            isMoviesErrors={isMoviesErrors}
           />
 
           <ProtectedRoute

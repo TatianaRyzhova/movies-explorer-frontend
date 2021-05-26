@@ -6,8 +6,8 @@ function Switch(props) {
       <p className="switch__text">{props.text}</p>
       <label className="switch__label">
         <input type="checkbox"
-               onChange={props.handleSwitch}
-               checked={props.switchChecked}
+               onChange={props.handleSwitchClick}
+               checked={props.onSwitchChecked}
         />
         <span className="switch__slider"></span>
       </label>

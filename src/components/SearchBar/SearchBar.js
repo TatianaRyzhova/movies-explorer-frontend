@@ -1,12 +1,8 @@
 import React, {useState} from "react";
 import searchIcon from "../../images/loop-button-icon.svg";
 import Switch from "../Switch/Switch";
-import {useFormWithValidation} from "../../hooks/useForm";
 
 function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked}) {
-
-  // const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
-
   const [data, setData] = useState({});
 
   const handleSubmit = (event) => {
@@ -24,8 +20,6 @@ function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked}) {
             placeholder="Movies"
             name="movies"
             required
-            // value={querySearch}
-            // value={values.movies}
             onChange={(e) => setData(e.target.value)}
           />
           <button className="search-bar__button" type='submit' aria-label='save' name="submit">

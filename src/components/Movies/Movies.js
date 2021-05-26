@@ -1,51 +1,75 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import MoreButton from "../MoreButton/MoreButton";
-import Preloader from "../Preloader/Preloader";
-import {filterMovies, filterShortMovies} from "../../utils/utils";
+import {filterMovies, filterShortMovies, getMoreMovies, getMoviesAmount} from "../../utils/utils";
 
-function Movies({movies, loggedIn, onGetMovies, }) {
+function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}) {
 
-  const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isShortMovie, setIsShortMovie] = useState(false);
+  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
+  const [moviesQty, setMoviesQty] = useState(getMoviesAmount());
+  const [availableMovies, setAvailableMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
 
-  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
-
-  const handleSearchSubmit = (value) => {
-    setSearchQuery(value);
-    if (!movies.length) {
-      onGetMovies();
-    }
-  };
-
-  // useEffect(() => {
-  //     setFilteredMovies(
-  //       filterMovies(movies, searchQuery)
-  //     )
-  //   }, [searchQuery, movies]
-  // )
-
-  function handleSearchButtonClick() {
-    setFilteredMovies(
-      filterMovies(movies, searchQuery)
-    )
-  }
+  // const [filteredMovies, setFilteredMovies] = useState([]);
+  // const [isShortMovie, setIsShortMovie] = useState(false);
+  // const [isSearchEmpty, setIsSearchEmpty] = useState(false);
 
   function handleSwitch() {
     setIsSwitchChecked(!isSwitchChecked);
   }
 
+  const handleSearchSubmit = (value) => {
+    setSearchQuery(value);
+    if (movies.length > 0) {
+      onGetMovies();
+    } else {
+      setIsSearchEmpty(true);
+    }
+  };
+
+  const handleClickMoreButton = () => {
+    setMoviesQty(moviesQty + getMoreMovies());
+  };
+
+  useEffect(() => {
+    const foundMovies = filterMovies(movies, searchQuery);
+    const filteredMovies = filterShortMovies(foundMovies, isSwitchChecked);
+    setAvailableMovies(filteredMovies);
+    setFilteredMovies(filteredMovies.slice(0, moviesQty));
+
+    if (!filteredMovies.length) {
+      setIsSearchEmpty(true);
+    } else {
+      setIsSearchEmpty(false);
+    }
+  }, [movies, searchQuery, isSwitchChecked, moviesQty]);
+
+  useEffect(() => {
+    const updateWindowWidth = () => {
+      setTimeout(() => {
+        setMoviesQty(getMoviesAmount());
+        setFilteredMovies(availableMovies.slice(0, getMoviesAmount()));
+      }, 1000);
+    };
+    window.addEventListener("resize", updateWindowWidth);
+    return () => window.removeEventListener("resize", updateWindowWidth);
+  }, [availableMovies]);
+
+
+  // function handleSearchButtonClick() {
+  //   setAllMovies(
+  //     utils.filterMovies(movies, searchQuery)
+  //   )
+  // }
+
   // const handleSearchButtonClick = () => {
-  //   const result = filterMovies(movies, searchQuery, isShortMovie);
-  //   if (!result.length) {
-  //     setIsSearchEmpty(true);
-  //   }
-  //   setFilteredMovies(result);
+  //   const result = filterMovies(movies, searchQuery);
+  //   setAllMovies(result);
   // };
 
   return (
@@ -54,20 +78,28 @@ function Movies({movies, loggedIn, onGetMovies, }) {
       <Header loggedIn={loggedIn}/>
       <SearchBar
         onSearchBarSubmit={handleSearchSubmit}
-        setQuerySearch={setSearchQuery}
-        handleSearchButtonClick={handleSearchButtonClick}
-        // onSwitchClick={handleSwitch}
-
-        switchChecked={isSwitchChecked}
-        handleSwitch={handleSwitch}
-      />
-      <Preloader/>
-
-      <MovieCardList
-        movies={filteredMovies}
+        onSwitchChecked={isSwitchChecked}
+        handleSwitchClick={handleSwitch}
       />
 
-      <MoreButton/>
+      {isSearchEmpty ?
+        (
+          <div className="movies__not-found">
+            <p className="movies__not-found_text">Nothing found...</p>
+          </div>
+        )
+      : (
+          <MovieCardList
+            movies={filteredMovies}
+            isMoviesLoading={isMoviesLoading}
+            isMoviesErrors={isMoviesErrors}
+          />
+        )
+
+      }
+
+
+      <MoreButton handleClickMoreButton={handleClickMoreButton}/>
       <Footer/>
 
     </div>

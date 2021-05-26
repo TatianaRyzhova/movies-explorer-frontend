@@ -1,46 +1,32 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import {Route, Switch} from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 
-function MovieCardList({movies}) {
+function MovieCardList({movies, isMoviesLoading, isMoviesErrors}) {
   return (
+
     <section className="movies">
-      <div className="movies__list">
-        {movies.map((movie) => (
-            <MovieCard
-              key={movie._id ?? movie.id}
-              movie={movie}
-              // onCardClick={props.onCardClick}
-              // onCardLike={props.onCardLike}
-              // onCardDelete={props.onCardDelete}
-            />
-          )
+      {isMoviesLoading || isMoviesErrors ? (
+        <div>
+            {isMoviesLoading ? <Preloader/> : isMoviesErrors}
+        </div>
+
+        )
+        : (
+          <div className="movies__list">
+            {movies.map((movie) => (
+                <MovieCard
+                  key={movie._id ?? movie.id}
+                  movie={movie}
+                  // onCardClick={props.onCardClick}
+                  // onCardLike={props.onCardLike}
+                  // onCardDelete={props.onCardDelete}
+                />
+              )
+            )}
+          </div>
         )}
-
-
-        {/*<Switch>*/}
-        {/*  <Route path="/movies">*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*    <MovieCard liked={true}/>*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*    <MovieCard liked={true}/>*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*  </Route>*/}
-
-        {/*  <Route path="/saved-movies">*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*    <MovieCard liked={true}/>*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*    <MovieCard liked={true}/>*/}
-        {/*    <MovieCard liked={false}/>*/}
-        {/*  </Route>*/}
-
-        {/*</Switch>*/}
-
-      </div>
     </section>
-
   )
 }
 
