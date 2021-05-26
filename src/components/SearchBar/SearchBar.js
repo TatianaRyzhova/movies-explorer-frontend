@@ -3,20 +3,15 @@ import searchIcon from "../../images/loop-button-icon.svg";
 import Switch from "../Switch/Switch";
 import {useFormWithValidation} from "../../hooks/useForm";
 
-function SearchBar({onSearchBarSubmit, querySearch, setQuerySearch, handleSearchButtonClick, handleSwitch, switchChecked}) {
+function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked}) {
 
-  const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
+  // const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
 
-  // const [searchQuery, setSearchQuery] = useState('');
-  // const [data, setData] = useState({});
+  const [data, setData] = useState({});
 
-  // const handleChange = (event) => {
-  //   setData(event.target.value)
-  // }
-  //
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearchBarSubmit();
+    onSearchBarSubmit(data);
   }
 
   return (
@@ -30,18 +25,18 @@ function SearchBar({onSearchBarSubmit, querySearch, setQuerySearch, handleSearch
             name="movies"
             required
             // value={querySearch}
-            value={values.movies}
-            onChange={(e) => setQuerySearch (e.target.value)}
+            // value={values.movies}
+            onChange={(e) => setData(e.target.value)}
           />
-          <button className="search-bar__button" type='submit' aria-label='save' name="submit" onClick={handleSearchButtonClick}>
+          <button className="search-bar__button" type='submit' aria-label='save' name="submit">
             <img src={searchIcon} alt="loop search icon" className="search-bar__loop-icon"/>
           </button>
         </div>
 
         <Switch
           text={"Short films"}
-          handleSwitch={handleSwitch}
-          switchChecked={switchChecked}
+          handleSwitchClick={handleSwitchClick}
+          onSwitchChecked={onSwitchChecked}
         />
 
       </form>
