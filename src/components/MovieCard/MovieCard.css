@@ -117,12 +117,12 @@
 
 @media screen and (max-width: 700px) {
   .movie-card {
-    width: 300px;
+    width: 292px;
     height: 235px;
   }
 
   .movie__photo {
-    width: 300px;
+    width: 292px;
     height: 168px;
   }
 }

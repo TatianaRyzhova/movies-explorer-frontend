@@ -4,13 +4,14 @@ import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import MoreButton from "../MoreButton/MoreButton";
-import {filterMovies, filterShortMovies, getMoreMovies, getMoviesAmount} from "../../utils/utils";
+import {filterMovies, filterShortMovies} from "../../utils/filterUtils";
+import {getMoreMovies, getMoviesQty} from "../../utils/moreButtonUtils";
 
 function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
-  const [moviesQty, setMoviesQty] = useState(getMoviesAmount());
+  const [moviesQty, setMoviesQty] = useState(getMoviesQty());
   const [availableMovies, setAvailableMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
@@ -52,8 +53,8 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}
   useEffect(() => {
     const updateWindowWidth = () => {
       setTimeout(() => {
-        setMoviesQty(getMoviesAmount());
-        setFilteredMovies(availableMovies.slice(0, getMoviesAmount()));
+        setMoviesQty(getMoviesQty());
+        setFilteredMovies(availableMovies.slice(0, getMoviesQty()));
       }, 1000);
     };
     window.addEventListener("resize", updateWindowWidth);
@@ -98,8 +99,11 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}
 
       }
 
-
-      <MoreButton handleClickMoreButton={handleClickMoreButton}/>
+      <MoreButton
+        handleClickMoreButton={handleClickMoreButton}
+        filteredMovies={filteredMovies}
+        moviesQty={moviesQty}
+      />
       <Footer/>
 
     </div>
