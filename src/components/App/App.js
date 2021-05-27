@@ -27,6 +27,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isMoviesErrors, setIsMoviesErrors] = React.useState('');
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovie] = useState([]);
+  // const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -91,11 +93,28 @@ function App() {
     history.push('/signin');
   }
 
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     mainApi.getUserInfo()
+  //       .then((response) => {
+  //         setCurrentUser(response)
+  //       })
+  //       .catch((error) => {
+  //         console.log(error)
+  //       })
+  //   }
+  // }, [loggedIn])
+
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getUserInfo()
-        .then((response) => {
-          setCurrentUser(response)
+      Promise.all([
+        mainApi.getUserInfo(),
+        mainApi.getSavedMovies()
+      ])
+        .then(([userData, savedMovies]) => {
+          setCurrentUser(userData);
+          setSavedMovie(savedMovies);
+          localStorage.setItem('likedMovies', JSON.stringify(savedMovies));
         })
         .catch((error) => {
           console.log(error)
@@ -148,14 +167,41 @@ function App() {
   useEffect(() => {
     moviesApi.getMovies()
       .then((response) => {
-        // localStorage.setItem('movies', JSON.stringify(response))
+        localStorage.setItem('movies', JSON.stringify(response))
         setMovies(response);
       })
       .catch((error) => {
         console.log(error);
       })
-  }, [])
+  }, [savedMovies])
 
+
+  const isSaved = (movie) => savedMovies.some(i => i.id === movie.id);
+
+  function handleLikeButton(movie) {
+    mainApi.postNewMovieCard(movie)
+      .then((data) => {
+        setSavedMovie([...savedMovies, data]);
+        // setIsSaved(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  function handleDeleteButton(movie) {
+    mainApi.deleteMovieCard(movie._id)
+      .then(() => {
+        const newMovieCards = savedMovies.filter(
+          (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
+        );
+        setSavedMovie(newMovieCards);
+        // setIsSaved(false);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   return (
     <div className="page">
@@ -192,12 +238,20 @@ function App() {
             onGetMovies={getFilteredMovies}
             isMoviesLoading={isLoading}
             isMoviesErrors={isMoviesErrors}
+            onMovieLike={handleLikeButton}
+            isSaved={isSaved}
           />
 
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
+            isMoviesLoading={isLoading}
+            isMoviesErrors={isMoviesErrors} //??
+            likedMovies={savedMovies}
+            onMovieDelete={handleDeleteButton}
+            savedMovies={savedMovies}
+            isSaved={isSaved}
           />
 
           <Route>

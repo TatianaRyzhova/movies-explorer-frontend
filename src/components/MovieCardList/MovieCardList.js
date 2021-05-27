@@ -2,9 +2,8 @@ import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import Preloader from "../Preloader/Preloader";
 
-function MovieCardList({movies, isMoviesLoading, isMoviesErrors}) {
+function MovieCardList({movies, isMoviesLoading, isMoviesErrors, onMovieLike, onMovieDelete, isSaved}) {
   return (
-
     <section className="movies">
       {isMoviesLoading || isMoviesErrors ? (
         <div>
@@ -18,9 +17,9 @@ function MovieCardList({movies, isMoviesLoading, isMoviesErrors}) {
                 <MovieCard
                   key={movie._id ?? movie.id}
                   movie={movie}
-                  // onCardClick={props.onCardClick}
-                  // onCardLike={props.onCardLike}
-                  // onCardDelete={props.onCardDelete}
+                  onMovieLike={onMovieLike}
+                  onMovieDelete={onMovieDelete}
+                  isSaved={isSaved}
                 />
               )
             )}

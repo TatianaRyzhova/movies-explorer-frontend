@@ -1,4 +1,4 @@
-import {AUTH_BASE_URL, BASE_URL} from './constants';
+import {BASE_URL, MOVIES_BASE_URL} from './constants';
 
 class MainApi {
   constructor({baseUrl}) {
@@ -64,16 +64,16 @@ class MainApi {
       },
       body: JSON.stringify({
         nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        nameEN: movie.nameEN || 'Unknown title',
         director: movie.director,
-        country: movie.country,
+        country: movie.country || 'Unknown country',
         year: movie.year,
         duration: movie.duration,
         description: movie.description,
-        trailer: movie.trailer,
-        image: AUTH_BASE_URL + movie.image.url,
-        thumbnail: AUTH_BASE_URL + movie.image.url,
-        movieId: movie.movieId
+        trailer: movie.trailerLink,
+        image: MOVIES_BASE_URL + movie.image.url,
+        thumbnail: MOVIES_BASE_URL + movie.image.url,
+        movieId: Math.floor(Math.random() * 100)
       })
     })
       .then(result => {
@@ -93,7 +93,6 @@ class MainApi {
         return this._checkRequestStatus(result);
       })
   }
-
 }
 
 export const mainApi = new MainApi({

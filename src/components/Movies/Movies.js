@@ -7,7 +7,7 @@ import MoreButton from "../MoreButton/MoreButton";
 import {filterMovies, filterShortMovies} from "../../utils/filterUtils";
 import {getMoreMovies, getMoviesQty} from "../../utils/moreButtonUtils";
 
-function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}) {
+function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors, onMovieLike, isSaved}) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
@@ -15,10 +15,6 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}
   const [availableMovies, setAvailableMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-
-  // const [filteredMovies, setFilteredMovies] = useState([]);
-  // const [isShortMovie, setIsShortMovie] = useState(false);
-  // const [isSearchEmpty, setIsSearchEmpty] = useState(false);
 
   function handleSwitch() {
     setIsSwitchChecked(!isSwitchChecked);
@@ -51,27 +47,15 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}
   }, [movies, searchQuery, isSwitchChecked, moviesQty]);
 
   useEffect(() => {
-    const updateWindowWidth = () => {
+    const handleScreenWidth = () => {
       setTimeout(() => {
         setMoviesQty(getMoviesQty());
         setFilteredMovies(availableMovies.slice(0, getMoviesQty()));
       }, 1000);
     };
-    window.addEventListener("resize", updateWindowWidth);
-    return () => window.removeEventListener("resize", updateWindowWidth);
+    window.addEventListener("resize", handleScreenWidth);
+    return () => window.removeEventListener("resize", handleScreenWidth);
   }, [availableMovies]);
-
-
-  // function handleSearchButtonClick() {
-  //   setAllMovies(
-  //     utils.filterMovies(movies, searchQuery)
-  //   )
-  // }
-
-  // const handleSearchButtonClick = () => {
-  //   const result = filterMovies(movies, searchQuery);
-  //   setAllMovies(result);
-  // };
 
   return (
     <div>
@@ -94,11 +78,11 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors}
             movies={filteredMovies}
             isMoviesLoading={isMoviesLoading}
             isMoviesErrors={isMoviesErrors}
+            onMovieLike={onMovieLike}
+            isSaved={isSaved}
           />
         )
-
       }
-
       <MoreButton
         handleClickMoreButton={handleClickMoreButton}
         filteredMovies={filteredMovies}

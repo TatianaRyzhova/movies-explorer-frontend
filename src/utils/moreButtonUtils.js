@@ -11,12 +11,3 @@ export const getMoviesQty = () => {
 export const getMoreMovies = () => {
   return window.innerWidth <= 1220 ? 2 : 4;
 };
-
-
-export const checkSavedMovies = (allMovies, savedMovies) => {
-  savedMovies.forEach((savedMovie) => {
-    const movie = allMovies.find((item) => item.nameRU === savedMovie.nameRU);
-    movie.isSaved = true;
-  });
-  return allMovies;
-};
