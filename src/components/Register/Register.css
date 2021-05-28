@@ -83,6 +83,16 @@
   opacity: 0.8;
 }
 
+@media all and (max-width: 768px) {
+  .registration {
+    position: static;
+  }
+
+  .registration__signin {
+    padding-bottom: 232px;
+  }
+}
+
 @media all and (max-width: 425px) {
   .registration__save-button {
     width: 260px;
@@ -93,6 +103,11 @@
 
   .registration__signin {
     margin-top: 14px;
+    padding-bottom: 30px;
+  }
+
+  .registration {
+    position: static;
   }
 
   .registration__signin-text {

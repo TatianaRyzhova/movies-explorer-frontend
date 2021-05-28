@@ -89,6 +89,14 @@
   .login__save-button {
     margin: 179px auto 0;
   }
+
+  .login {
+    position: static;
+  }
+
+  .login__signup {
+    padding-bottom: 232px;
+  }
 }
 
 @media all and (max-width: 425px) {
@@ -99,8 +107,13 @@
     display: block;
   }
 
+  .login {
+    position: static;
+  }
+
   .login__signup {
     margin-top: 14px;
+    padding-bottom: 30px;
   }
 
   .login__signup-text {
