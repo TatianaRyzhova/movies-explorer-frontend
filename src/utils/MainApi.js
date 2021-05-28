@@ -1,4 +1,4 @@
-import {BASE_URL, MOVIES_BASE_URL} from './constants';
+import {BASE_URL, DEFAULT_TRAILER_LINK, MOVIES_BASE_URL} from './constants';
 
 class MainApi {
   constructor({baseUrl}) {
@@ -70,7 +70,7 @@ class MainApi {
         year: movie.year,
         duration: movie.duration,
         description: movie.description,
-        trailer: movie.trailerLink,
+        trailer: movie.trailerLink || DEFAULT_TRAILER_LINK,
         image: MOVIES_BASE_URL + movie.image.url,
         thumbnail: MOVIES_BASE_URL + movie.image.url,
         movieId: movie.id
