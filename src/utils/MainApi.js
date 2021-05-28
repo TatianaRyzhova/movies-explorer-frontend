@@ -73,7 +73,7 @@ class MainApi {
         trailer: movie.trailerLink,
         image: MOVIES_BASE_URL + movie.image.url,
         thumbnail: MOVIES_BASE_URL + movie.image.url,
-        movieId: Math.floor(Math.random() * 100)
+        movieId: movie.id
       })
     })
       .then(result => {

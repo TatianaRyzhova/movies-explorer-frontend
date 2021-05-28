@@ -6,10 +6,9 @@ function MovieCardList({movies, isMoviesLoading, isMoviesErrors, onMovieLike, on
   return (
     <section className="movies">
       {isMoviesLoading || isMoviesErrors ? (
-        <div>
+          <div>
             {isMoviesLoading ? <Preloader/> : isMoviesErrors}
-        </div>
-
+          </div>
         )
         : (
           <div className="movies__list">

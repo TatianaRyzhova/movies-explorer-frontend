@@ -25,10 +25,9 @@ function App() {
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isMoviesErrors, setIsMoviesErrors] = React.useState('');
+  const [isMoviesErrors, setIsMoviesErrors] = React.useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovie] = useState([]);
-  // const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -93,18 +92,6 @@ function App() {
     history.push('/signin');
   }
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     mainApi.getUserInfo()
-  //       .then((response) => {
-  //         setCurrentUser(response)
-  //       })
-  //       .catch((error) => {
-  //         console.log(error)
-  //       })
-  //   }
-  // }, [loggedIn])
-
   useEffect(() => {
     if (loggedIn) {
       Promise.all([
@@ -148,7 +135,6 @@ function App() {
 
   function getFilteredMovies() {
     setIsLoading(true);
-    setIsMoviesErrors();
     moviesApi.getMovies()
       .then((response) => {
         localStorage.setItem('movies', JSON.stringify(response))
@@ -156,8 +142,11 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-        setIsMoviesErrors('An error occurred during the request. ' +
-          'There may be a connection problem or the server is unavailable. Please try again later.');
+        setIsMoviesErrors(true);
+        setSuccess(false);
+        setInfoTooltipPopupOpen(true);
+        setInfoTooltipMessage('An error occurred during the request. ' +
+          'There may be a connection problem or the server is unavailable. Please try again later.')
       })
       .finally(() => {
         setIsLoading(false);
@@ -176,13 +165,22 @@ function App() {
   }, [savedMovies])
 
 
-  const isSaved = (movie) => savedMovies.some(i => i.id === movie.id);
+  const isSaved = (movie) => savedMovies.some(i => i.movieId === movie.id);
 
   function handleLikeButton(movie) {
     mainApi.postNewMovieCard(movie)
       .then((data) => {
-        setSavedMovie([...savedMovies, data]);
-        // setIsSaved(true);
+        if (!isSaved(movie)) {
+          setSavedMovie([...savedMovies, data]);
+        } else {
+          mainApi.deleteMovieCard(data._id)
+            .then(() => {
+              const newMovieCards = savedMovies.filter(
+                (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
+              );
+              setSavedMovie(newMovieCards);
+            })
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -196,7 +194,6 @@ function App() {
           (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
         );
         setSavedMovie(newMovieCards);
-        // setIsSaved(false);
       })
       .catch((error) => {
         console.log(error)
@@ -247,23 +244,16 @@ function App() {
             component={SavedMovies}
             loggedIn={loggedIn}
             isMoviesLoading={isLoading}
-            isMoviesErrors={isMoviesErrors} //??
+            isMoviesErrors={isMoviesErrors}
             likedMovies={savedMovies}
             onMovieDelete={handleDeleteButton}
             savedMovies={savedMovies}
             isSaved={isSaved}
           />
 
-          <Route>
+          <Route path="*">
             {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/signin"/>}
           </Route>
-
-          {/*<Route path="/movies">*/}
-          {/*  <Movies/>*/}
-          {/*</Route>*/}
-          {/*<Route path="/saved-movies">*/}
-          {/*  <SavedMovies/>*/}
-          {/*</Route>*/}
 
           <Route path="/">
             <NotFound/>
