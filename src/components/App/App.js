@@ -155,6 +155,7 @@ function App() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     moviesApi.getMovies()
       .then((response) => {
         localStorage.setItem('movies', JSON.stringify(response))
@@ -162,6 +163,9 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }, [savedMovies])
 
