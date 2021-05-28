@@ -121,16 +121,21 @@
 }
 
 @media screen and (max-width: 1220px) {
+  .profile{
+    position: static;
+  }
+
   .profile__greeting {
     padding-top: 236px;
   }
 
   .profile__form {
-    margin: 96px auto 210px;
+    margin: 96px auto 0;
   }
 
   .profile__footer {
     margin-top: 210px;
+    padding-bottom: 269px;
   }
 
   .profile__modify-button {
@@ -139,13 +144,17 @@
 }
 
 @media screen and (max-width: 700px) {
+  .profile {
+    position: static;
+  }
+
   .profile__greeting {
     padding-top: 70px;
   }
 
   .profile__form {
     width: 260px;
-    margin: 80px auto 379px;
+    margin: 80px auto 0;
   }
 
   .profile__modify-button {
@@ -171,5 +180,6 @@
 
   .profile__footer {
     margin-top: 379px;
+    padding-bottom: 40px;
   }
 }
