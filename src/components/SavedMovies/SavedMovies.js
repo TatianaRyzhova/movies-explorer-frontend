@@ -15,18 +15,6 @@ function SavedMovies({loggedIn, savedMovies, onMovieDelete, isMoviesErrors, isMo
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
 
-  const handleSearchSubmit = (value) => {
-    setSearchQuery(value);
-  };
-
-  function handleSwitch() {
-    setIsSwitchChecked(!isSwitchChecked);
-  }
-
-  const handleClickMoreButton = () => {
-    setMoviesQty(moviesQty + getMoreMovies());
-  };
-
   useEffect(() => {
     const foundMovies = filterMovies(savedMovies, searchQuery);
     const filteredMovies = filterShortMovies(foundMovies, isSwitchChecked);
@@ -50,6 +38,18 @@ function SavedMovies({loggedIn, savedMovies, onMovieDelete, isMoviesErrors, isMo
     window.addEventListener("resize", handleScreenWidth);
     return () => window.removeEventListener("resize", handleScreenWidth);
   }, [likedMovies]);
+
+  const handleSearchSubmit = (value) => {
+    setSearchQuery(value);
+  };
+
+  function handleSwitch() {
+    setIsSwitchChecked(!isSwitchChecked);
+  }
+
+  const handleClickMoreButton = () => {
+    setMoviesQty(moviesQty + getMoreMovies());
+  };
 
   return (
     <div>

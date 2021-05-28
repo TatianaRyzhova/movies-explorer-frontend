@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
@@ -15,23 +15,6 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors,
   const [availableMovies, setAvailableMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-
-  function handleSwitch() {
-    setIsSwitchChecked(!isSwitchChecked);
-  }
-
-  const handleSearchSubmit = (value) => {
-    setSearchQuery(value);
-    if (movies.length > 0) {
-      onGetMovies();
-    } else {
-      setIsSearchEmpty(true);
-    }
-  };
-
-  const handleClickMoreButton = () => {
-    setMoviesQty(moviesQty + getMoreMovies());
-  };
 
   useEffect(() => {
     const foundMovies = filterMovies(movies, searchQuery);
@@ -56,6 +39,23 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors,
     window.addEventListener("resize", handleScreenWidth);
     return () => window.removeEventListener("resize", handleScreenWidth);
   }, [availableMovies]);
+
+  const handleSearchSubmit = (value) => {
+    setSearchQuery(value);
+    if (movies.length > 0) {
+      onGetMovies();
+    } else {
+      setIsSearchEmpty(true);
+    }
+  };
+
+  function handleSwitch() {
+    setIsSwitchChecked(!isSwitchChecked);
+  }
+
+  const handleClickMoreButton = () => {
+    setMoviesQty(moviesQty + getMoreMovies());
+  };
 
   return (
     <div>
