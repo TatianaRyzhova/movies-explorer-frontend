@@ -3,7 +3,6 @@
 }
 
 .navigation__not-logged {
-  /*visibility: hidden;*/
   display: none;
 }
 
@@ -16,7 +15,6 @@
 }
 
 .navigation__logged_visible {
-  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -247,7 +245,6 @@
   }
 }
 
-
 @media screen and (max-width: 760px) {
   .navigation {
     margin: 0 14px 0 0;
@@ -350,5 +347,14 @@
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navigation__signin-button {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    padding: 0;
   }
 }
