@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
+import {Route, Switch, useHistory, useLocation} from 'react-router-dom';
 import './App.css';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -17,6 +17,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const history = useHistory();
+  const location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
@@ -38,7 +39,7 @@ function App() {
             setLoggedIn(true);
             setUserName(result.name);
             setEmail(result.email);
-            history.push('/');
+            history.push(location.pathname);
           }
         })
         .catch(() => history.push('/'));
@@ -251,9 +252,9 @@ function App() {
             isSaved={isSaved}
           />
 
-          <Route path="*">
-            {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/signin"/>}
-          </Route>
+          {/*<Route>*/}
+          {/*  {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/signin"/>}*/}
+          {/*</Route>*/}
 
           <Route path="/">
             <NotFound/>
