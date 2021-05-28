@@ -36,7 +36,7 @@ function MovieCard({movie, onMovieLike, onMovieDelete, isSaved}) {
 
       <div className="movie__description-container">
         <div className="movie__info">
-          <p className="movie__description">{movie.nameEN}</p>
+          <p className="movie__description">{movie.nameEN || 'Unknown title'}</p>
           <p className="movie__duration">{movieDuration}</p>
         </div>
 

@@ -173,23 +173,29 @@ function App() {
   const isSaved = (movie) => savedMovies.some(i => i.movieId === movie.id);
 
   function handleLikeButton(movie) {
-    mainApi.postNewMovieCard(movie)
-      .then((data) => {
-        if (!isSaved(movie)) {
+    const movieId = savedMovies.find(i => i.movieId === movie.id);
+    if (!isSaved(movie)) {
+      mainApi.postNewMovieCard(movie)
+        .then((data) => {
           setSavedMovie([...savedMovies, data]);
-        } else {
-          mainApi.deleteMovieCard(data._id)
-            .then(() => {
-              const newMovieCards = savedMovies.filter(
-                (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
-              );
-              setSavedMovie(newMovieCards);
-            })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+          localStorage.setItem('likedMovies', JSON.stringify(savedMovies));
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    } else {
+      mainApi.deleteMovieCard(movieId._id)
+        .then(() => {
+          const newMovieCards = savedMovies.filter(
+            (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
+          );
+          setSavedMovie(newMovieCards);
+          localStorage.setItem('likedMovies', JSON.stringify(savedMovies));
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 
   function handleDeleteButton(movie) {
@@ -199,6 +205,7 @@ function App() {
           (savedMovie) => savedMovie.movieId !== (movie.id || movie.movieId)
         );
         setSavedMovie(newMovieCards);
+        localStorage.setItem('likedMovies', JSON.stringify(savedMovies));
       })
       .catch((error) => {
         console.log(error)
