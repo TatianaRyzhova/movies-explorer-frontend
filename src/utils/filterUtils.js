@@ -1,3 +1,5 @@
+import {SHORT_MOVIE_DURATION} from "./constants";
+
 export const filterMovies = (movies, searchQuery) => {
   return movies.filter((movie) => {
     return (
@@ -7,5 +9,5 @@ export const filterMovies = (movies, searchQuery) => {
 };
 
 export const filterShortMovies = (movies, isSwitchChecked) => {
-  return movies.filter((movie) => (isSwitchChecked ? movie.duration <= 40 : Number));
+  return movies.filter((movie) => (isSwitchChecked ? movie.duration <= SHORT_MOVIE_DURATION : Number));
 };
