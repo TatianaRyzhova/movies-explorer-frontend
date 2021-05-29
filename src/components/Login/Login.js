@@ -4,13 +4,15 @@ import AuthHeader from "../AuthHeader/AuthHeader";
 import {Link} from "react-router-dom";
 import {useFormWithValidation} from "../../hooks/useForm";
 
-function Login({onLogin}) {
+function Login({onLogin, success}) {
   const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onLogin(values.email, values.password);
-    resetForm();
+    if(success) {
+      resetForm();
+    }
   }
 
   return (

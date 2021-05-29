@@ -52,6 +52,7 @@ function App() {
         if (result.token) {
           localStorage.setItem('token', result.token);
           setLoggedIn(true);
+          setSuccess(true);
           setEmail(email);
           setUserName(result.name);
           history.push('/movies');
@@ -221,11 +222,15 @@ function App() {
           </Route>
 
           <Route path="/signup">
-            <Register onRegister={handleRegister}/>
+            <Register
+              onRegister={handleRegister}
+              success={success}/>
           </Route>
 
           <Route path="/signin">
-            <Login onLogin={handleLogin}/>
+            <Login
+              onLogin={handleLogin}
+              success={success}/>
           </Route>
 
           <ProtectedRoute

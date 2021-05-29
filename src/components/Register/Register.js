@@ -4,13 +4,15 @@ import AuthInput from "../AuthInput/AuthInput";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import {useFormWithValidation} from "../../hooks/useForm";
 
-function Register({onRegister}) {
+function Register({onRegister, success}) {
   const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onRegister(values.name, values.email, values.password);
-    resetForm();
+    if(success) {
+      resetForm();
+    }
   }
 
   return (
