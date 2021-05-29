@@ -136,39 +136,38 @@ function App() {
   }
 
   function getFilteredMovies() {
-    setIsLoading(true);
-    moviesApi.getMovies()
-      .then((response) => {
-        localStorage.setItem('movies', JSON.stringify(response))
-        setMovies(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsMoviesErrors(true);
-        setSuccess(false);
-        setInfoTooltipPopupOpen(true);
-        setInfoTooltipMessage('An error occurred during the request. ' +
-          'There may be a connection problem or the server is unavailable. Please try again later.')
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+    if (movies.length === 0) {
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then((response) => {
+          localStorage.setItem('movies', JSON.stringify(response))
+          setMovies(response);
+          console.log(movies);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsMoviesErrors(true);
+          setSuccess(false);
+          setInfoTooltipPopupOpen(true);
+          setInfoTooltipMessage('An error occurred during the request. ' +
+            'There may be a connection problem or the server is unavailable. Please try again later.')
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
+    } else {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    }
   }
 
   useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getMovies()
-      .then((response) => {
-        localStorage.setItem('movies', JSON.stringify(response))
-        setMovies(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }, [savedMovies])
+    if (JSON.parse(localStorage.getItem("movies"))) {
+      setMovies(movies || savedMovies)
+      console.log('I am here')
+    } else {
+      setMovies([]);
+    }
+  }, [savedMovies]);
 
 
   const isSaved = (movie) => savedMovies.some(i => i.movieId === movie.id);
@@ -250,6 +249,7 @@ function App() {
             loggedIn={loggedIn}
             movies={movies}
             onGetMovies={getFilteredMovies}
+            searchButtonClick={getFilteredMovies}
             isMoviesLoading={isLoading}
             isMoviesErrors={isMoviesErrors}
             onMovieLike={handleLikeButton}
@@ -267,10 +267,6 @@ function App() {
             savedMovies={savedMovies}
             isSaved={isSaved}
           />
-
-          {/*<Route>*/}
-          {/*  {loggedIn ? <Redirect to="/movies"/> : <Redirect to="/signin"/>}*/}
-          {/*</Route>*/}
 
           <Route path="/">
             <NotFound/>

@@ -7,7 +7,7 @@ import MoreButton from "../MoreButton/MoreButton";
 import {filterMovies, filterShortMovies} from "../../utils/filterUtils";
 import {getMoreMovies, getMoviesQty} from "../../utils/moreButtonUtils";
 
-function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors, onMovieLike, isSaved}) {
+function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors, onMovieLike, searchButtonClick, isSaved}) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
@@ -65,6 +65,7 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors,
         onSearchBarSubmit={handleSearchSubmit}
         onSwitchChecked={isSwitchChecked}
         handleSwitchClick={handleSwitch}
+        searchButtonClick={searchButtonClick}
       />
 
       {isSearchEmpty ?
@@ -83,6 +84,7 @@ function Movies({movies, loggedIn, onGetMovies, isMoviesLoading, isMoviesErrors,
           />
         )
       }
+
       <MoreButton
         handleClickMoreButton={handleClickMoreButton}
         filteredMovies={filteredMovies}

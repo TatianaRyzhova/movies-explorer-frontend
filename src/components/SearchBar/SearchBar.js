@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import searchIcon from "../../images/loop-button-icon.svg";
 import Switch from "../Switch/Switch";
 
-function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked}) {
+function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked, searchButtonClick}) {
   const [data, setData] = useState({});
 
   const handleSubmit = (event) => {
@@ -22,7 +22,7 @@ function SearchBar({onSearchBarSubmit,handleSwitchClick,onSwitchChecked}) {
             required
             onChange={(e) => setData(e.target.value)}
           />
-          <button className="search-bar__button" type='submit' aria-label='save' name="submit">
+          <button className="search-bar__button" type='submit' aria-label='save' name="submit" onClick={searchButtonClick}>
             <img src={searchIcon} alt="loop search icon" className="search-bar__loop-icon"/>
           </button>
         </div>
