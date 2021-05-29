@@ -16,7 +16,7 @@ function SavedMovies({loggedIn, savedMovies, onMovieDelete, isMoviesErrors, isMo
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
 
   useEffect(() => {
-    const foundMovies = filterMovies(savedMovies, searchQuery);
+    const foundMovies = filterMovies(savedMovies, searchQuery.toLowerCase());
     const filteredMovies = filterShortMovies(foundMovies, isSwitchChecked);
     setLikedMovies(filteredMovies);
     setFilteredMovies(filteredMovies.slice(0, moviesQty));
@@ -26,7 +26,7 @@ function SavedMovies({loggedIn, savedMovies, onMovieDelete, isMoviesErrors, isMo
     } else {
       setIsSearchEmpty(false);
     }
-  }, [savedMovies, searchQuery, isSwitchChecked, moviesQty]);
+  }, [savedMovies, searchQuery.toLowerCase(), isSwitchChecked, moviesQty]);
 
   useEffect(() => {
     const handleScreenWidth = () => {
