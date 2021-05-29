@@ -142,7 +142,6 @@ function App() {
         .then((response) => {
           localStorage.setItem('movies', JSON.stringify(response))
           setMovies(response);
-          console.log(movies);
         })
         .catch((error) => {
           console.log(error);
