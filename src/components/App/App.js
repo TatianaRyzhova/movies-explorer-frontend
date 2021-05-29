@@ -163,7 +163,6 @@ function App() {
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("movies"))) {
       setMovies(movies || savedMovies)
-      console.log('I am here')
     } else {
       setMovies([]);
     }
