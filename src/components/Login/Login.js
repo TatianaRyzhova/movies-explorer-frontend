@@ -1,27 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import AuthInput from "../AuthInput/AuthInput";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import {Link} from "react-router-dom";
+import {useFormWithValidation} from "../../hooks/useForm";
 
-function Login() {
-  const [state, setState] = useState({
-    email: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState({});
+function Login({onLogin, success}) {
+  const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
 
-  function handleChange(event) {
-    const input = event.target;
-    const value = input.value;
-    const name = input.name;
-    setState({
-      ...state,
-      [name]: value
-    });
-    setErrors({...errors, [name]: input.validationMessage});
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onLogin(values.email, values.password);
+    if(success) {
+      resetForm();
+    }
   }
-
-  const isEnabled = state.email.length > 0 && state.password.length > 0;
 
   return (
     <div className="login">
@@ -30,7 +22,7 @@ function Login() {
           greetingText={'Nice to see you!'}
         />
 
-        <form name="login" className="login__form">
+        <form name="login" className="login__form" onSubmit={handleSubmit} noValidate>
           <AuthInput
             label={'E-mail'}
             type={'email'}
@@ -38,8 +30,8 @@ function Login() {
             id={'name-input'}
             placeholder={'E-mail'}
             errorName={errors.email}
+            value={values.email}
             handleChange={handleChange}
-            state={state.email}
           />
           <AuthInput
             label={'Password'}
@@ -49,17 +41,16 @@ function Login() {
             minLength={8}
             placeholder={'Password'}
             errorName={errors.password}
+            value={values.password}
             handleChange={handleChange}
-            state={state.password}
           />
 
-          <Link to="/">
             <button type="submit" aria-label="Save"
-                    disabled={!isEnabled}
-                    className="login__save-button login__save-button_sign-in">
+                    disabled={!isValid}
+                    className={`login__save-button ${!isValid && "login__save-button_state_disabled"}`}
+            >
               Sign In
             </button>
-          </Link>
 
         </form>
 

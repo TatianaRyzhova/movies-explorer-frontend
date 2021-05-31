@@ -3,20 +3,25 @@
 }
 
 .navigation__not-logged {
-  /*Change it to display:flex if need to see the header when user is not logged otherwise display:none*/
+  display: none;
+}
+
+.navigation__not-logged_visible {
   display: flex;
 }
 
 .navigation__logged {
-  /*Change it to display:flex if need to see the header when user is logged otherwise display:none*/
   display: none;
+}
+
+.navigation__logged_visible {
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .navigation__logged_mobile {
   flex-direction: column;
-
 }
 
 .navigation__main-page {
@@ -184,13 +189,12 @@
     margin-bottom: 28px;
   }
 
-  .navigation__logged {
+  .navigation__logged_visible {
     justify-content: normal;
   }
 
-  .navigation__burger {
-    /*Change it to display:block to see the header when you user is logged*/
-    display: none;
+  .navigation__burger_visible {
+    display: block;
     width: 44px;
     height: 44px;
     background: transparent url('../../images/burger-menu.svg') center no-repeat;
@@ -200,7 +204,7 @@
     cursor: pointer;
   }
 
-  .navigation_menu-open .navigation__burger {
+  .navigation_menu-open .navigation__burger_visible {
     width: 22px;
     height: 22px;
     background: transparent url('../../images/close-icon.svg') center no-repeat;
@@ -240,7 +244,6 @@
     bottom: 0;
   }
 }
-
 
 @media screen and (max-width: 760px) {
   .navigation {
@@ -294,7 +297,7 @@
     margin-bottom: 24px;
   }
 
-  .navigation__logged {
+  .navigation__logged_visible {
     justify-content: normal;
   }
 
@@ -310,9 +313,8 @@
     background-color: #202020;
   }
 
-  .navigation__burger {
-    /*Change it to display:block to see the header when you user is logged*/
-    display: none;
+  .navigation__burger_visible {
+    display: block;
     width: 40px;
     height: 43px;
     background: transparent url('../../images/burger-menu.svg') center no-repeat;
@@ -345,5 +347,14 @@
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navigation__signin-button {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    padding: 0;
   }
 }

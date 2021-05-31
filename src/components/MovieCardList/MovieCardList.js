@@ -1,34 +1,30 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import {Route, Switch} from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 
-function MovieCardList() {
+function MovieCardList({movies, isMoviesLoading, isMoviesErrors, onMovieLike, onMovieDelete, isSaved}) {
   return (
     <section className="movies">
-      <div className="movies__list">
-        <Switch>
-          <Route path="/movies">
-            <MovieCard liked={false}/>
-            <MovieCard liked={true}/>
-            <MovieCard liked={false}/>
-            <MovieCard liked={true}/>
-            <MovieCard liked={false}/>
-            <MovieCard liked={false}/>
-          </Route>
-
-          <Route path="/saved-movies">
-            <MovieCard liked={false}/>
-            <MovieCard liked={true}/>
-            <MovieCard liked={false}/>
-            <MovieCard liked={true}/>
-            <MovieCard liked={false}/>
-          </Route>
-
-        </Switch>
-
-      </div>
+      {isMoviesLoading || isMoviesErrors ? (
+          <div>
+            {isMoviesLoading ? <Preloader/> : isMoviesErrors}
+          </div>
+        )
+        : (
+          <div className="movies__list">
+            {movies.map((movie) => (
+                <MovieCard
+                  key={movie._id ?? movie.id}
+                  movie={movie}
+                  onMovieLike={onMovieLike}
+                  onMovieDelete={onMovieDelete}
+                  isSaved={isSaved}
+                />
+              )
+            )}
+          </div>
+        )}
     </section>
-
   )
 }
 

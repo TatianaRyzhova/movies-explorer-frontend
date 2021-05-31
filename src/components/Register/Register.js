@@ -1,28 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import AuthInput from "../AuthInput/AuthInput";
 import AuthHeader from "../AuthHeader/AuthHeader";
+import {useFormWithValidation} from "../../hooks/useForm";
 
-function Register() {
-  const [state, setState] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState({});
+function Register({onRegister, success}) {
+  const {values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
 
-  function handleChange(event) {
-    const input = event.target;
-    const value = input.value;
-    const name = input.name;
-    setState({
-      ...state,
-      [name]: value
-    });
-    setErrors({...errors, [name]: input.validationMessage});
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onRegister(values.name, values.email, values.password);
+    if(success) {
+      resetForm();
+    }
   }
-
-  const isEnabled = state.name.length > 0 && state.email.length > 0 && state.password.length > 0;
 
   return (
     <div className="registration">
@@ -31,18 +22,18 @@ function Register() {
           greetingText={'Welcome!'}
         />
 
-        <form name="registration" className="registration__form" >
+        <form name="registration" className="registration__form" onSubmit={handleSubmit} noValidate>
           <AuthInput
             label={'Name'}
-            type={'name'}
+            type={'text'}
             name={'name'}
             id={'name-input'}
             minLength={2}
             maxLength={30}
             placeholder={'Name'}
             errorName={errors.name}
+            value={values.name}
             handleChange={handleChange}
-            state={state.name}
           />
 
           <AuthInput
@@ -52,9 +43,10 @@ function Register() {
             id={'email-input'}
             placeholder={'E-mail'}
             errorName={errors.email}
+            value={values.email}
             handleChange={handleChange}
-            state={state.email}
           />
+
           <AuthInput
             label={'Password'}
             type={'password'}
@@ -63,16 +55,15 @@ function Register() {
             placeholder={'Password'}
             minLength={8}
             errorName={errors.password}
+            value={values.password}
             handleChange={handleChange}
-            state={state.password}
           />
 
-          <Link to="/">
-            <button type="submit" aria-label="Save" disabled={!isEnabled}
-                    className="registration__save-button">
-              Register
-            </button>
-          </Link>
+          <button type="submit" aria-label="Save" disabled={!isValid}
+                  className={`registration__save-button ${!isValid && "registration__save-button_state_disabled"}`}
+          >
+            Register
+          </button>
 
         </form>
 

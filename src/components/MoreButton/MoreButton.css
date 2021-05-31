@@ -4,6 +4,10 @@
   padding-bottom: 80px;
 }
 
+.more-button_not-visible {
+  display: none;
+}
+
 .more-button {
   width: 1140px;
   height: 36px;

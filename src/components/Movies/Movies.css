@@ -1,0 +1,38 @@
+.movies__not-found {
+  background-color: #202020;
+  min-height: 400px;
+}
+
+.movies__not-found_text {
+  padding-top: 80px;
+  max-width: 1140px;
+  padding-bottom: 83px;
+  margin: 0 auto;
+  color: #3ddc84;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px
+}
+
+@media screen and (max-width: 1220px) {
+  .movies__not-found_text {
+    max-width: 708px;
+    padding-top: 60px;
+    padding-bottom: 57px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movies__not-found_text {
+    max-width: 292px;
+    padding-top: 60px;
+    padding-bottom: 44px;
+    font-size: 14px;
+    line-height: 15px
+  }
+
+  .movies__not-found {
+    background-color: #202020;
+    min-height: 200px;
+  }
+}

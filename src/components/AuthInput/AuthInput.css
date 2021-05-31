@@ -21,6 +21,10 @@ label {
   border: none;
 }
 
+.auth-input_error {
+  color: #EE3465;
+}
+
 .input-error {
   font-weight: normal;
   font-size: 10px;
