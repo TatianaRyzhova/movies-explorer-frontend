@@ -6,10 +6,10 @@
 
 ## Project description:
 
-Movie-explorer is an application which allows users to search movies. They can filter movies by movie duration.
-Users can add movies to favorites and remove them from there.
-To be able to use the website new users should be registered and authorized.
-Also, users have opportunity to modify their data: update their name and email.
+Movie-explorer is an application that allows users to search for movies. 
+They can filter movies by movie duration. Users can add movies to favorites and remove them from there. 
+To be able to use the website new users should be registered and authorized. 
+Also, users have the opportunity to modify their data: update their name and email.
 
 :iphone: The app is adapted to tablets and mobiles.
 
